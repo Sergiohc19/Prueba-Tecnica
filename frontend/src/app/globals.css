@@ -1,0 +1,12 @@
+/* Estilo global  */
+
+body{
+  background-color: rgb(35, 35, 35);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+};
+
+form{
+  color: black;
+}
