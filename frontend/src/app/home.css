@@ -6,3 +6,12 @@
 h1{
   margin: auto;
 }
+
+.container{
+  width: 95%;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  padding-block: 1%;
+}
+

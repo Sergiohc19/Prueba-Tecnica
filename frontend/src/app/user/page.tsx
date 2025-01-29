@@ -6,7 +6,9 @@
 
 "use client";
 import "./user.css";
-import Carrousel from "./toptenmovies";
+import apiTMDB from "@/apiTMDB";
+import MediaTopTen from "../components/carousel/page"
+
 
 const userName: string = "userName";
 const userEmail: string = "userEmail";
@@ -18,14 +20,16 @@ export default function UserPage() {
       <h1>USER PAGE</h1>
       <strong>{userName}</strong>
       <strong>{userEmail}</strong>
-      
+
       {/* Aquí mostrar los tres carruseles con las 10 primeras peliculas de la API de TMDB*/}
-      
+
 
       {/* <MediaTopTen titulo="Titulo" apiKey={apiTMDB.topTenMovie}/> */}
-      <Carrousel />
-      
-      
+
+      <MediaTopTen infoTitle="Peliculas mejor valoradas" apiTMDBkey={apiTMDB.topTenMovie} />
+      <MediaTopTen infoTitle="Series mejor valoradas" apiTMDBkey={apiTMDB.topTenSerie} />
+      <MediaTopTen infoTitle="Series de hoy" apiTMDBkey={apiTMDB.seriesAiringToday} />
+
 
     </>
   );

@@ -8,4 +8,6 @@ const apiTMDB = {
     "https://api.themoviedb.org/3/trending/tv/week?language=es-ES&page=1",
 };
 
+
+
 export default apiTMDB;

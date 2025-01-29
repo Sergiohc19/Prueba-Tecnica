@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Usamos useRouter para redirigir
 import styles from "./loginform.module.css";
 
 export default function LoginForm() {
@@ -8,31 +10,39 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter(); // Usamos el hook router
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
 
-    
-      const response = await fetch("/api/auth/login", {
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_SIGNIN as string, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // Aseguramos que las cookies se incluyan en la solicitud
       });
 
-      if (response.ok) {
-        // Aquí redirigir si el login es exitoso
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
-        setError(errorData.message || "Error en el login");
+        throw new Error(errorData.message || "Error al iniciar sesión");
       }
-     
-      setError("Error en el servidor, intente de nuevo");
-    
+
+      // Si el login es exitoso, redirigimos al dashboard
+      router.push("/user"); // O la ruta que desees para el usuario autenticado
+
+    } catch (error: any) {
+      // Captura cualquier error
+      setError(error.message || "Error en el login");
+    }
   };
 
   return (
+    <>
+    <div className={styles.containerlogin}>
     <form onSubmit={handleLogin} className={styles.form}>
       <div>
         <label htmlFor="email" className={styles.label}>
@@ -78,5 +88,26 @@ export default function LoginForm() {
         Iniciar sesión
       </button>
     </form>
+    <div className={styles.registrarse}>
+
+    <p className={styles.parrafo}>¿No tienes usuario?</p>
+    <Link href="/components/formregistrer">
+      <button
+        style={{
+          padding: "10px",
+          backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          fontSize: "16px",
+        }}
+      >
+        Registrarse aquí
+      </button>
+    </Link>
+    </div>
+    </div>
+    </>
   );
 }

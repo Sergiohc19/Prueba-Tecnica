@@ -1,10 +1,12 @@
 "use client";
 
+import apiTMDB from "@/apiTMDB";
 import React, { useEffect, useState, useRef } from "react";
 
 interface Card {
   id: number;
-  title: string;
+  name: string;
+  title: string,
   poster_path: string;
 }
 
@@ -14,6 +16,7 @@ interface CardProps {
 }
 
 const API_AUTH = process.env.NEXT_PUBLIC_TMDB_AUTH;
+
 
 if (!API_AUTH) {
   throw new Error("API key not defined");
@@ -31,15 +34,22 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
   const [cards, setCards] = useState<Card[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+
   useEffect(() => {
     fetch(apiTMDBkey, options)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.topTenMovie)
+        console.log(data.topTenSerie)
+        console.log(data.seriesAiringToday)
         const dataTen = data.results.slice(0, 10);
+        console.log(data)
         setCards(dataTen);
+      
       })
       .catch((err) => console.error("Error fetching data:", err));
   }, [apiTMDBkey]);
+
 
   const scroll = (direction: "left" | "right") => {
     const scrollAmount = direction === "left" ? -400 : 400;
@@ -48,6 +58,7 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
     }
   };
 
+ 
   return (
     <div className="bw-Movies">
       <h1 className="bw-scrollTitle">{infoTitle}</h1>
@@ -56,10 +67,11 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
           <div className="bw-card" key={card.id}>
             <img
               src={`https://image.tmdb.org/t/p/w500${card.poster_path}`}
-              alt={card.title}
+              alt={card.name}
               className="bw-card-image"
             />
-            <p className="bw-card-title">{index + 1}. {card.title}</p>
+           <p className="bw-card-title">{index + 1}. {card.name || card.title}</p>
+
           </div>
         ))}
       </div>
@@ -80,13 +92,27 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
       <style jsx>{`
         .bw-Movies {
           margin: 20px;
+          padding-block: 1%;
         }
 
         .bw-scrollTitle {
-          font-size: 2rem;
-          font-weight: bold;
+          font-size: 50px;
           margin-bottom: 20px;
+          font-weight: bolder;
+          transition: .3s linear;
+          color: transparent;
+          -webkit-text-stroke: 2px #1C99AD;
+          background-image: linear-gradient(to left,  #1C99AD,rgb(0, 221, 250), black,  #1C99AD);
+          -webkit-background-clip: text;
+          animation: move 30s linear infinite;
         }
+
+
+        @keyframes move {
+           100% {
+                  background-position: 2000px 0;
+                }
+          }
 
         .bw-card-container {
           display: flex;
@@ -111,6 +137,7 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
           font-size: 1rem;
           margin-top: 10px;
           color: #333;
+          font-weight: bold;
         }
 
         .bw-castsection-scroll {
