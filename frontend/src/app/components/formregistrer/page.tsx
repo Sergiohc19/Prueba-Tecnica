@@ -48,80 +48,82 @@ export default function SignUp() {
       }
 
       // Si el login es exitoso, redirigir al usuario
-      router.push("/user");
+      router.push("../");
 
-    } catch (error: any) {
-      setError(error.message || "Error en el proceso");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message || "Error en el proceso");
+      } else {
+        setError("Error desconocido");
+      }
     }
   };
 
   return (
     <>
-    <form onSubmit={handleSignUp} className={styles.form}>
-      <div>
-        <label htmlFor="email" className={styles.label}>
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={styles.input}
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="name" className={styles.label}>
-          Nombre
-        </label>
-        <input
-          id="name"
-          type="text"
-          placeholder="Nombre"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className={styles.input}
-          required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="password" className={styles.label}>
-          Contraseña
-        </label>
-        <div className={styles.passwordContainer}>
+      <form onSubmit={handleSignUp} className={styles.form}>
+        <div>
+          <label htmlFor="email" className={styles.label}>
+            Email
+          </label>
           <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id="email"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className={styles.input}
             required
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className={styles.toggleButton}
-          >
-            {showPassword ? "Ocultar" : "Mostrar"}
-          </button>
         </div>
-      </div>
 
-      {error && <p className={styles.error}>{error}</p>}
+        <div>
+          <label htmlFor="name" className={styles.label}>
+            Nombre
+          </label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Nombre"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={styles.input}
+            required
+          />
+        </div>
 
-      <button type="submit" className={styles.submitButton}>
-        Registrarse 
-      </button>
-    </form>
-    <div className={styles.link}>
-      <p>¿Ya tienes usuario?</p>
-   
-    <Link href="../">
-  
+        <div>
+          <label htmlFor="password" className={styles.label}>
+            Contraseña
+          </label>
+          <div className={styles.passwordContainer}>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.input}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className={styles.toggleButton}
+            >
+              {showPassword ? "Ocultar" : "Mostrar"}
+            </button>
+          </div>
+        </div>
+
+        {error && <p className={styles.error}>{error}</p>}
+
+        <button type="submit" className={styles.submitButton}>
+          Registrarse 
+        </button>
+      </form>
+      <div className={styles.link}>
+        <p>¿Ya tienes usuario?</p>
+        <Link href="../">
           <button
             style={{
               padding: "10px 20px",
@@ -133,11 +135,10 @@ export default function SignUp() {
               fontSize: "16px",
             }}
           >
-          Iniciar sesión
+            Iniciar sesión
           </button>
         </Link>
-        </div>
+      </div>
     </>
-
   );
 }
