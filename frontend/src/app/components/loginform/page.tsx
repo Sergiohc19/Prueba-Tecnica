@@ -32,12 +32,18 @@ export default function LoginForm() {
       }
 
       // Si el login es exitoso, redirigimos al dashboard
-      router.push("/user"); // O la ruta que desees para el usuario autenticado
+      router.push("./user"); // O la ruta que desees para el usuario autenticado
 
-    } catch (error: any) {
-      // Captura cualquier error
-      setError(error.message || "Error en el login");
-    }
+    } catch (error: unknown) {
+      console.error("Error en la solicitud:", error); // Muestra el error en la consola para depuración
+  
+      if (error instanceof Error) {
+          setError(error.message || "Error en el proceso");
+      } else {
+          setError("Error desconocido");
+      }
+  }
+  
   };
 
   return (

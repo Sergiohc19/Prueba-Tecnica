@@ -38,7 +38,7 @@ export default function SignUp() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, name, password }),
         credentials: "include", // Esto asegura que las cookies se envíen con la solicitud
       });
 
@@ -48,7 +48,7 @@ export default function SignUp() {
       }
 
       // Si el login es exitoso, redirigir al usuario
-      router.push("../");
+      router.push("/user");
 
     } catch (error: unknown) {
       if (error instanceof Error) {
