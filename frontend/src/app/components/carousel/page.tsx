@@ -99,12 +99,12 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
           font-size: 50px;
           margin-bottom: 20px;
           font-weight: bolder;
-          transition: .3s linear;
+          transition: 2s linear;
           color: transparent;
           -webkit-text-stroke: 2px #1C99AD;
-          background-image: linear-gradient(to left,  #1C99AD,rgb(0, 221, 250), black,  #1C99AD);
+          background-image: linear-gradient(to left,  #1C99AD,rgb(155, 230, 240), white,rgb(209, 231, 235));
           -webkit-background-clip: text;
-          animation: move 30s linear infinite;
+          animation: move 20s linear infinite;
         }
 
 
