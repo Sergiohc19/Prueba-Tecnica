@@ -18,7 +18,7 @@ import Link from "next/link";
         body: JSON.stringify({ email, password }),
       });
   
-      if (response.ok) {
+      if(response.ok) {
         // Guardar la cookie en el navegador y redirigir a /user
         window.location.href = "/user";
       } else {

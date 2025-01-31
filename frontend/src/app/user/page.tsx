@@ -10,6 +10,7 @@ import apiTMDB from "@/apiTMDB";
 import MediaTopTen from "../components/carousel/page"
 
 
+
 const userName: string = "userName";
 const userEmail: string = "userEmail";
 

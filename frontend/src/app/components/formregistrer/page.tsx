@@ -22,6 +22,8 @@ export default function SignUp() {
         },
         body: JSON.stringify({ email, name, password }),
       });
+      console.log("API URL:", process.env.NEXT_PUBLIC_SIGNUP);
+
 
       if (response.ok) {
           // Guardar la cookie en el navegador y redirigir a /user
