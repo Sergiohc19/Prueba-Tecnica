@@ -27,7 +27,7 @@ export default function SignUp() {
 
       if (response.ok) {
           // Guardar la cookie en el navegador y redirigir a /user
-      window.location.href = "/loginform";
+      window.location.href = "/";
     } else {
       alert("No se ha registrado correctamente");
     }
