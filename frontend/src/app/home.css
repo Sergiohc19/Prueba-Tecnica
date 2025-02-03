@@ -8,10 +8,10 @@ h1{
 }
 
 .container{
-  width: 95%;
+  width: 100%;
   align-items: center;
   flex-direction: column;
   margin: auto;
-  padding-block: 1%;
+  
 }
 

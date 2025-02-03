@@ -136,7 +136,6 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
         .bw-card-title {
           font-size: 1rem;
           margin-top: 10px;
-          color: #333;
           font-weight: bold;
         }
 
