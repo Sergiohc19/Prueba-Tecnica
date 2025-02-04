@@ -1,6 +1,6 @@
 "use client";
 
-import apiTMDB from "@/apiTMDB";
+
 import React, { useEffect, useState, useRef } from "react";
 
 interface Card {
