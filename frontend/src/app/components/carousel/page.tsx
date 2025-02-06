@@ -1,6 +1,7 @@
 "use client";
 
 
+import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 
 interface Card {
@@ -65,7 +66,7 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
       <div className="bw-card-container" ref={scrollRef}>
         {cards.map((card, index) => (
           <div className="bw-card" key={card.id}>
-            <img
+            <Image
               src={`https://image.tmdb.org/t/p/w500${card.poster_path}`}
               alt={card.name}
               className="bw-card-image"
