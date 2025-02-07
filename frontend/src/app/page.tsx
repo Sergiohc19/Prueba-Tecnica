@@ -11,11 +11,7 @@ export default function Home() {
       <div className="container">
         <h1>Home</h1>
         <LoginForm />
-        <p>
-          <strong>
-            Si el login es exitoso, la web te redirige a /user.
-          </strong>
-        </p>
+     
 
       </div>
     </>
