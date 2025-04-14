@@ -70,6 +70,8 @@ export default function MediaTopTen({ infoTitle, apiTMDBkey }: CardProps) {
               src={`https://image.tmdb.org/t/p/w500${card.poster_path}`}
               alt={card.name}
               className="bw-card-image"
+              width={200}
+              height={300}
             />
            <p className="bw-card-title">{index + 1}. {card.name || card.title}</p>
 
